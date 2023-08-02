@@ -1,0 +1,9 @@
+iam.auto.tfvars
+# Ignore the .terraform directory and all files under it.
+.terraform/
+.terraform/enforce_mfa/
+.git
+.vscode
+.DS_Store
+
+

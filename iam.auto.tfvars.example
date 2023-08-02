@@ -1,0 +1,4 @@
+region="your_region"
+keybase_account="your_keybase_account"
+account_alias="your_account_alias"
+aws_profile="your_aws_credential_profile_name"
