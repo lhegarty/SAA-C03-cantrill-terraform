@@ -12,8 +12,8 @@ resource "aws_iam_group" "administrators" {
 ################################
 
 module "enforce_mfa" {
-  source  = "terraform-module/enforce-mfa/aws"
-  version = "~> 1.0"
+  source                          = "terraform-module/enforce-mfa/aws"
+  version                         = "~> 1.0"
   policy_name                     = "managed-mfa-enforce"
   account_id                      = data.aws_caller_identity.current.id
   groups                          = [aws_iam_group.administrators.name]
@@ -79,7 +79,7 @@ resource "aws_iam_user_group_membership" "administrator" {
 ########################
 
 output "password" {
-  value = aws_iam_user_login_profile.administrator.encrypted_password
+  value     = aws_iam_user_login_profile.administrator.encrypted_password
   sensitive = true
 }
 
