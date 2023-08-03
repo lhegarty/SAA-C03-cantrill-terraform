@@ -26,6 +26,7 @@
 ### TF Vars
 
 - Rename `iam.auto.tfvars.example` to `iam.auto.tfvars` and add your own values to the variables.
+- keybase profile in the format "keybase:YOUR_PROFILE_NAME"
 
 - run `terraform init`
 - plan and apply
