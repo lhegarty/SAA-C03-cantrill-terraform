@@ -30,3 +30,9 @@
 ### For secret key..
 
 - `terraform output -raw secret_access_key | base64 --decode | keybase pgp decrypt`
+
+### To Login to your new admin account
+
+- https://YOUR_ACCOUNT_ALIAS.signin.aws.amazon.com/console/
+- Username: IAMADMIN
+- Password: Password from above.
