@@ -1,3 +1,14 @@
+### Add root account credentials to your .aws/credentials file and ensure $AWS_PROFILE has assumed.
+- Can also use the following alias
+
+```
+  awsume() {
+    export AWS_PROFILE=$1
+  }
+```
+
+- `aws sts get-caller-identity` can confirm you have assumed the correct account.
+
 ### Create s3 bucket manually via cli for state file to be encrypted at rest.
 
 - `aws s3 mb s3://YOUR_BUCKET_NAME --region YOUR_REGION`
@@ -5,8 +16,6 @@
 - `aws s3api put-bucket-encryption --bucket YOUR_BUCKET_NAME --server-side-encryption-configuration '{"Rules": [{"ApplyServerSideEncryptionByDefault": {"SSEAlgorithm": "AES256"}}]}'`
 
 - Configure the backend.tf file to point to your bucket.
-
-### Initially created with Root account, credentials swapped to admin generated account after creation. Revoke root access keys
 
 ### Setup Keybase
 
@@ -31,7 +40,9 @@
 
 - `terraform output -raw secret_access_key | base64 --decode | keybase pgp decrypt`
 
-### To Login to your new admin account
+### Delete credentials from root account.
+
+### Login to your new admin account
 
 - https://YOUR_ACCOUNT_ALIAS.signin.aws.amazon.com/console/
 - Username: IAMADMIN
