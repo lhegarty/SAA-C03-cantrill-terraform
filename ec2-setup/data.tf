@@ -13,7 +13,3 @@ data "aws_ami" "amazon_linux" {
     values = ["hvm"]
   }
 }
-
-data "aws_security_group" "default" {
-  name = "default"
-}

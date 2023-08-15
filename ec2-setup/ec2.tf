@@ -29,13 +29,16 @@ resource "aws_key_pair" "A4L_key_pair" {
 
 module "ec2_instance" {
   source = "terraform-aws-modules/ec2-instance/aws"
-  name   = "my-first-ec2-instance"
-  ami    = data.aws_ami.amazon_linux.id
+
+  name = "my-first-ec2-instance"
+
+  ami = data.aws_ami.amazon_linux.id
+
   instance_type               = "t2.micro"
   key_name                    = aws_key_pair.A4L_key_pair.key_name
   monitoring                  = true
   associate_public_ip_address = true
-  vpc_security_group_ids      = [data.aws_security_group.default.id]
+  vpc_security_group_ids      = [aws_default_security_group.default.id]
 
   tags = {
     Terraform   = "true"
