@@ -5,3 +5,5 @@
 - `ssh -i "placeholder-keypair.pem" ec2-user@ec2-54-89-88-253.compute-1.amazonaws.com` 
 
 The above line will vary based on your instance.
+
+- `chmod 777 placeholder-keypair.pem` to allow another TF apply
