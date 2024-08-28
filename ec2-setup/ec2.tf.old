@@ -30,7 +30,7 @@ resource "aws_key_pair" "A4L_key_pair" {
 module "ec2_instance" {
   source = "terraform-aws-modules/ec2-instance/aws"
 
-  name = "my-first-ec2-instance"
+  name = "cloudwatch-test"
 
   ami = data.aws_ami.amazon_linux.id
 
