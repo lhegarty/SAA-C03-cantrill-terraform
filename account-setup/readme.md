@@ -80,7 +80,9 @@ Proceed to terraform init, validate, plan, and apply when you are ready to deplo
 
 Post deployment of your IAM user, you can decrypt the sensitive secret_key using the following command:
 
-terraform output -json password | jq -r . | base64 --decode | gpg --decrypt --pinentry-mode=loopback
+terraform output -raw password | base64 --decode | gpg --decrypt --pinentry-mode=loopback
 Skip the --pinentry-mode=loopback flag if you did not set a passphrase on PGP key generation
 
 may need to use `export GPG_TTY=$(tty)` to set gpg to expect input from the standard terminal.
+
+This will need doing with the secret_access_key as well

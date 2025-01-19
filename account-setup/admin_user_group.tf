@@ -87,7 +87,7 @@ resource "aws_iam_user_group_membership" "administrator" {
 ########################
 
 output "password" {
-  value     = aws_iam_access_key.user_access_key.encrypted_secret
+  value     = aws_iam_user_login_profile.administrator.encrypted_password
   sensitive = true
 }
 
