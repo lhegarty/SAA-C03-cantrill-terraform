@@ -1,10 +1,6 @@
 variable "region" {
-  type = string
+  type    = string
   default = "us-east-1"
-}
-
-variable "keybase_account" {
-  type = string
 }
 
 variable "account_alias" {

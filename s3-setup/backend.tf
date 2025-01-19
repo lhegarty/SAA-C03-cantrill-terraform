@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
-    profile = "management-admin"
     bucket  = "management-account-state-bucket"
-    key     = "iam-accounts.tfstate"
+    key     = "first-s3.tfstate"
+    encrypt = true
   }
 }

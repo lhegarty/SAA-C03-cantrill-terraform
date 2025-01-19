@@ -5,5 +5,8 @@ iam.auto.tfvars
 .git
 .vscode
 .DS_Store
-
+*.pem
+*.gpg
+*.tfstate
+*.tfstate.backup
 

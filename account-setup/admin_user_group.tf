@@ -12,8 +12,8 @@ resource "aws_iam_group" "administrators" {
 ################################
 
 module "enforce_mfa" {
-  source  = "terraform-module/enforce-mfa/aws"
-  version = "~> 1.0"
+  source                          = "terraform-module/enforce-mfa/aws"
+  version                         = "~> 1.0"
   policy_name                     = "managed-mfa-enforce"
   account_id                      = data.aws_caller_identity.current.id
   groups                          = [aws_iam_group.administrators.name]
@@ -41,6 +41,14 @@ resource "aws_iam_group_policy_attachment" "administrators" {
   policy_arn = data.aws_iam_policy.administrator_access.arn
 }
 
+###################
+# Define PGP Key  #
+###################
+
+data "local_file" "pgp_key" {
+  filename = abspath("./public-key-binary.gpg")
+}
+
 ###############
 # Create User #
 ###############
@@ -57,12 +65,12 @@ resource "aws_iam_account_alias" "main" {
 resource "aws_iam_user_login_profile" "administrator" {
   user                    = aws_iam_user.administrator.name
   password_reset_required = true
-  pgp_key                 = var.keybase_account
+  pgp_key                 = data.local_file.pgp_key.content_base64
 }
 
 resource "aws_iam_access_key" "user_access_key" {
   user    = aws_iam_user.administrator.name
-  pgp_key = var.keybase_account
+  pgp_key = data.local_file.pgp_key.content_base64
 }
 
 ######################## 
@@ -79,7 +87,7 @@ resource "aws_iam_user_group_membership" "administrator" {
 ########################
 
 output "password" {
-  value = aws_iam_user_login_profile.administrator.encrypted_password
+  value     = aws_iam_access_key.user_access_key.encrypted_secret
   sensitive = true
 }
 
@@ -90,3 +98,8 @@ output "access_key_id" {
 output "secret_access_key" {
   value = aws_iam_access_key.user_access_key.encrypted_secret
 }
+
+output "login_url" {
+  value = "https://${var.account_alias}.signin.aws.amazon.com/console"
+}
+
